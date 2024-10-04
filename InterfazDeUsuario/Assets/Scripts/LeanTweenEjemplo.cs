@@ -18,8 +18,12 @@ public class LeanTweenEjemplo : MonoBehaviour
     void Start()
     {
         //LeanTween.scale(gameObject, Vector3.one * sizeToScale, durationAnim).setEase(LeanTweenType.easeInBounce);// LeanTween siempre en start
-        LeanTween.moveLocalY(gameObject, positionYFinal, durationAnim).setEase(LeanTweenType.easeInOutElastic);
-        LeanTween.moveLocalX(gameObject, positionDosX, durationX).setEase(LeanTweenType.easeInOutElastic);
+        //LeanTween.moveLocalY(gameObject, positionYFinal, durationAnim).setEase(LeanTweenType.easeInOutElastic);
+        //LeanTween.moveLocalX(gameObject, positionDosX, durationX).setEase(LeanTweenType.easeInOutElastic);
+        LeanTween.moveLocalX(gameObject, positionDosX, durationX).setOnComplete(() =>
+        {
+            gameObject.SetActive(true);
+        });
     }
 
     // Update is called once per frame
