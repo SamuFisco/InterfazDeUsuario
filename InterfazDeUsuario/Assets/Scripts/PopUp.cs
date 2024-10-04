@@ -23,13 +23,50 @@ public class PopUp : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))        
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
-            background.SetActive(true);
-            backgroundF.SetActive(true);
-            LeanTween.moveLocalY(background, -900f, 0f);
-            LeanTween.moveLocalY(background, 0f, timeAnim).setEase(animCurve);
+            if (background.activeSelf)
+            {
+                CerrarMnu();
+            }
+            else
+            {
+                ShowPoup();
+            }
+        }
+       
+        {
+            //ShowPoup();
+            //background.SetActive(true);
+            //backgroundF.SetActive(true);
+            //LeanTween.moveLocalY(background, -900f, 0f);
+            //LeanTween.moveLocalY(background, 0f, timeAnim).setEase(animCurve);
         }
 
+    }
+    public void ShowPoup()
+    {
+        background.SetActive(true);
+        backgroundF.SetActive(true);
+        LeanTween.moveLocalY(background, -900f, 0f);
+        LeanTween.moveLocalY(background, 0f, timeAnim).setEase(animCurve);
+    }
+    public void CerrarMnu()
+    {
+        
+        
+        //LeanTween.moveLocalY(background, -900f, 0f);
+        LeanTween.moveLocalY(background, 0f, timeAnim).setEase(animCurve).setOnComplete(() =>
+        {
+            background.SetActive(false);
+        });
+        LeanTween.alphaCanvas(backgroundF.GetComponent<CanvasGroup>(), 0f, timeAnim).setOnComplete(() =>
+        {
+        backgroundF.SetActive(false);
+            //Poner el alpha del canvas a 1, hacerlo en 0 segundos
+            LeanTween.alphaCanvas(backgroundF.GetComponent<CanvasGroup>(), 1f, 0f);
+
+        });
+        //backgroundF.SetActive(false);
     }
 }
